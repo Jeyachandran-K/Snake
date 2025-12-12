@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8666bd81cee0444aabd5b9844011f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  snakeBodyPrefab: {fileID: 9184087486611565137, guid: 26e2c86e9b3251e4785208a5b79404e6, type: 3}
+  snake: {fileID: 1089828790}
+  food: {fileID: 0}
   foodPrefab: {fileID: 1080487624315705345, guid: a3396ae0b6bba9248895bbdfecfd97c5, type: 3}
+  snakeBodyPrefab: {fileID: 9184087486611565137, guid: 26e2c86e9b3251e4785208a5b79404e6, type: 3}
   moveInterval: 0.15
 --- !u!4 &233867686
 Transform:
