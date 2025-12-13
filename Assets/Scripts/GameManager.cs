@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     }
     public Vector3 GetRandomEmptyPosition()
     {
-        return new Vector3(Mathf.FloorToInt(Random.Range(-gridWidth/2 ,gridWidth/2))-0.5f,Mathf.FloorToInt(Random.Range(-gridHeight/2 ,gridHeight/2))-0.5f,0);
+        float posX = Mathf.FloorToInt(Random.Range(-gridWidth / 2, gridWidth / 2 - 1 ));
+        float posY = Mathf.FloorToInt(Random.Range(-gridHeight / 2, gridHeight / 2 - 1));
+        return new Vector3(posX+0.5f,posY+0.5f,0);
     }
 
 }

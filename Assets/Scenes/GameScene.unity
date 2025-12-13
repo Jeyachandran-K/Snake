@@ -469,6 +469,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Snake
   moveInterval: 0.15
+  snakeBody: {fileID: 9184087486611565137, guid: 26e2c86e9b3251e4785208a5b79404e6, type: 3}
+  snakeBodyPrefab: {fileID: 7577656812778152708, guid: 26e2c86e9b3251e4785208a5b79404e6, type: 3}
 --- !u!61 &1089828790
 BoxCollider2D:
   m_ObjectHideFlags: 0
