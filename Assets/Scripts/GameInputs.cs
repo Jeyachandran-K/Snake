@@ -18,6 +18,21 @@ public class GameInputs : MonoBehaviour
     {
         
     }
+    public bool IsUpPressed()
+    {
+        return inputActions.Snake.Up.IsPressed();
+    }
+    public bool IsDownPressed()
+    {
+        return inputActions.Snake.Down.IsPressed();
+    }
+    public bool IsRightPressed()
+    {
+        return inputActions.Snake.Right.IsPressed();
+    }
+    public bool IsLeftPressed()
+    {
+        return inputActions.Snake.Left.IsPressed();
+    }
 
-    
 }
