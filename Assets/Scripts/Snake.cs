@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Snake : MonoBehaviour
 {
+    public static Snake Instance {  get; private set; }
+
+    public event EventHandler OnEatingFood;
+
     [SerializeField] private float moveInterval = 0.15f;
 
     private float timer = 0f;
@@ -13,6 +18,7 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         inputVector = Vector3.right;
     }
 
@@ -47,6 +53,14 @@ public class Snake : MonoBehaviour
         else
         {
             timer += Time.deltaTime;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if(collider2D.gameObject.TryGetComponent(out Food food))
+        {
+            OnEatingFood?.Invoke(this,EventArgs.Empty);
+            food.DestroySelf();
         }
     }
 

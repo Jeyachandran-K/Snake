@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8464835179399041953}
-  - component: {fileID: 3843173371211235843}
   - component: {fileID: 6949582727657997670}
+  - component: {fileID: 8386799040403249355}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -34,18 +34,6 @@ Transform:
   - {fileID: 2756347810643582600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3843173371211235843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080487624315705345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ea1598882ba9b49acf465ac82ada27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Food
 --- !u!58 &6949582727657997670
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -81,7 +69,19 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.48
+--- !u!114 &8386799040403249355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080487624315705345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbafedf90eb2a934a97c8c92d6d04abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Food
 --- !u!1 &5009239925641459341
 GameObject:
   m_ObjectHideFlags: 0
