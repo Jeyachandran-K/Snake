@@ -332,6 +332,50 @@ Transform:
   - {fileID: 1746754862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &808009860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808009861}
+  - component: {fileID: 808009862}
+  m_Layer: 0
+  m_Name: GameInputs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &808009861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808009860}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808009862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808009860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aec9d5e25430dd45ba3acc77088a369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameInputs
 --- !u!1 &1089828787
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +386,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1089828788}
   - component: {fileID: 1089828789}
-  - component: {fileID: 1089828790}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -375,21 +418,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1089828787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d98119e34d030b443bd9a8490b70b7f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SnakeMovement
---- !u!114 &1089828790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089828787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b5b7dc017a52b4cb82b7277a76abc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Snake
+  moveInterval: 0.15
 --- !u!1 &1456369104
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,3 +612,4 @@ SceneRoots:
   - {fileID: 1089828788}
   - {fileID: 233867686}
   - {fileID: 727127071}
+  - {fileID: 808009861}
