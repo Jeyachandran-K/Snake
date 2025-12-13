@@ -30,13 +30,21 @@ public class Snake : MonoBehaviour
 
     private Vector3 inputVector;
 
-    private List<SnakeBodyPrefab> snakeBodyList = new List<SnakeBodyPrefab>();
+    private List<GameObject> snakeBodyList = new List<GameObject>();
+    private List<Vector3> snakeBodyPositionList = new List<Vector3>();
 
     private void Awake()
     {
         Instance = this;
         inputVector = Vector3.right;
         snakeDirection = SnakeDirection.Right;
+    }
+
+    private void Start()
+    {
+        snakeBodyList.Add(gameObject);
+        snakeBodyPositionList.Add(transform.position);
+
     }
 
     private void Update()
@@ -68,7 +76,12 @@ public class Snake : MonoBehaviour
     {
         if (timer > moveInterval)
         {
-            transform.position += inputVector;
+            foreach(GameObject g in snakeBodyList)
+            {
+                g.transform.position += inputVector;
+
+            }
+            
             timer = 0f;
         }
         else
@@ -110,9 +123,13 @@ public class Snake : MonoBehaviour
                 break;
         }
 
+        Transform parent = transform;
         
-        GameObject spawnedObject=Instantiate(snakeBody,newBodyPartPosition, Quaternion.identity);
-        
+        GameObject spawnedObject=Instantiate(snakeBody,newBodyPartPosition, Quaternion.identity,parent);
+
+        snakeBodyList.Add(spawnedObject);
+        snakeBodyPositionList.Add(spawnedObject.transform.position);
+           
     }
 
 }
