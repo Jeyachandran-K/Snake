@@ -148,11 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8666bd81cee0444aabd5b9844011f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  snake: {fileID: 1089828790}
-  food: {fileID: 0}
-  foodPrefab: {fileID: 1080487624315705345, guid: a3396ae0b6bba9248895bbdfecfd97c5, type: 3}
-  snakeBodyPrefab: {fileID: 9184087486611565137, guid: 26e2c86e9b3251e4785208a5b79404e6, type: 3}
-  moveInterval: 0.15
 --- !u!4 &233867686
 Transform:
   m_ObjectHideFlags: 0
@@ -249,7 +244,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.18970276, g: 0.29569885, b: 0.46226418, a: 0}
+  m_BackGroundColor: {r: 0.3137255, g: 0.2784314, b: 0.29411766, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -383,9 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98119e34d030b443bd9a8490b70b7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SnakeMovement
-  snakeSpeed: 1
-  timer: 0
-  snakeDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1089828790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,8 +507,8 @@ Transform:
   m_GameObject: {fileID: 1746754861}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: -0.023, y: 0, z: 0}
+  m_LocalScale: {x: 34, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 727127071}
