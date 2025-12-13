@@ -13,6 +13,10 @@ public class GameInputs : MonoBehaviour
         inputActions = new InputActions();
         inputActions.Snake.Enable();
     }
+    private void OnDisable()
+    {
+        inputActions.Snake.Disable();
+    }
 
     private void Update()
     {

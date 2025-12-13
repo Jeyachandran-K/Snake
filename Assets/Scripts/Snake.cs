@@ -5,17 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
 {
-    public enum SnakeDirection 
-    {
-        Right,
-        Left,
-        Up,
-        Down
-    }
-
     public static Snake Instance {  get; private set; }
 
     public event EventHandler OnEatingFood;
@@ -24,7 +17,7 @@ public class Snake : MonoBehaviour
     [SerializeField] private GameObject snakeBody;
 
     private float timer = 0f;
-    private SnakeDirection snakeDirection;
+    
     private int snakeLength;
 
     private Vector3 inputVector;
@@ -36,15 +29,12 @@ public class Snake : MonoBehaviour
     {
         Instance = this;
         inputVector = Vector3.right;
-        snakeDirection = SnakeDirection.Right;
     }
 
     private void Start()
     {
         snakeBodyList.Add(gameObject);
         snakeBodyPositionList.Add(transform.position);
-        PrintList();
-
     }
 
     private void Update()
@@ -52,22 +42,18 @@ public class Snake : MonoBehaviour
         if (GameInputs.Instance.IsRightPressed() && inputVector != Vector3.left)
         {
             inputVector = Vector3.right;
-            snakeDirection = SnakeDirection.Right;
         }
         if (GameInputs.Instance.IsLeftPressed() && inputVector != Vector3.right)
         {
             inputVector = Vector3.left;
-            snakeDirection = SnakeDirection.Left;
         }
         if (GameInputs.Instance.IsUpPressed() && inputVector != Vector3.down)
         {
             inputVector = Vector3.up;
-            snakeDirection = SnakeDirection.Up;
         }
         if (GameInputs.Instance.IsDownPressed() && inputVector != Vector3.up)
         {
             inputVector = Vector3.down;
-            snakeDirection = SnakeDirection.Down;
         }
         MoveSnake();
     }
@@ -78,6 +64,13 @@ public class Snake : MonoBehaviour
         {
 
             Vector3 newHeadPosition = transform.position + inputVector;
+
+            if (snakeBodyPositionList.Contains(newHeadPosition))
+            {
+                Debug.Log("Game Over!");
+                transform.position = Vector3.zero;
+                SceneManager.LoadScene(0);
+            }
 
             for (int i = snakeBodyPositionList.Count - 1; i > 0; i--)
             {
@@ -97,6 +90,8 @@ public class Snake : MonoBehaviour
             timer += Time.deltaTime;
         }
     }
+
+
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
         if(collider2D.gameObject.TryGetComponent(out Food food))
@@ -106,6 +101,7 @@ public class Snake : MonoBehaviour
             OnEatingFood?.Invoke(this,EventArgs.Empty);
             food.DestroySelf();
         }
+        
     }
 
     
@@ -116,13 +112,13 @@ public class Snake : MonoBehaviour
         snakeBodyList.Add(spawedObject);
         snakeBodyPositionList.Add(spawnPosition);
     }
-    private void PrintList()
+    public bool OccupiesPosition(Vector3 candiate)
     {
-        Debug.Log("Snake Length is  :" + snakeLength);
-
+        foreach(Vector3 pos in snakeBodyPositionList)
+        {
+            if(pos==candiate) return true;
+        }
+        return false;
     }
-    private void MovementUpdate()
-    {
-
-    }
+    
 }
