@@ -23,10 +23,9 @@ public class Snake : MonoBehaviour
     [SerializeField] private float moveInterval = 0.15f;
     [SerializeField] private GameObject snakeBody;
 
-    [SerializeField]private SnakeBodyPrefab snakeBodyPrefab;
-
     private float timer = 0f;
     private SnakeDirection snakeDirection;
+    private int snakeLength;
 
     private Vector3 inputVector;
 
@@ -44,6 +43,7 @@ public class Snake : MonoBehaviour
     {
         snakeBodyList.Add(gameObject);
         snakeBodyPositionList.Add(transform.position);
+        PrintList();
 
     }
 
@@ -76,12 +76,20 @@ public class Snake : MonoBehaviour
     {
         if (timer > moveInterval)
         {
-            foreach(GameObject g in snakeBodyList)
-            {
-                g.transform.position += inputVector;
 
+            Vector3 newHeadPosition = transform.position + inputVector;
+
+            for (int i = snakeBodyPositionList.Count - 1; i > 0; i--)
+            {
+                snakeBodyPositionList[i] = snakeBodyPositionList[i - 1];
             }
-            
+            snakeBodyPositionList[0] = newHeadPosition;
+
+            for (int j = 0; j < snakeBodyList.Count; j++)
+            {
+                snakeBodyList[j].transform.position = snakeBodyPositionList[j];
+            }
+
             timer = 0f;
         }
         else
@@ -93,6 +101,7 @@ public class Snake : MonoBehaviour
     {
         if(collider2D.gameObject.TryGetComponent(out Food food))
         {
+            snakeLength++;
             GrowSnake();
             OnEatingFood?.Invoke(this,EventArgs.Empty);
             food.DestroySelf();
@@ -102,34 +111,18 @@ public class Snake : MonoBehaviour
     
     private void GrowSnake()
     {
-        Vector3 currentSnakePosition=transform.position;
-        Vector3 newBodyPartPosition=Vector3.zero;
-
-        switch (snakeDirection)
-        {
-            case SnakeDirection.Up:
-                newBodyPartPosition = new Vector3(currentSnakePosition.x, currentSnakePosition.y - 1, 0);
-                break;
-            case SnakeDirection.Down:
-                newBodyPartPosition = new Vector3(currentSnakePosition.x, currentSnakePosition.y +1, 0);
-                break;
-            case SnakeDirection.Right:
-                newBodyPartPosition = new Vector3(currentSnakePosition.x-1, currentSnakePosition.y, 0);
-                break;
-            case SnakeDirection.Left:
-                newBodyPartPosition = new Vector3(currentSnakePosition.x+1, currentSnakePosition.y , 0);
-                break;
-            default:
-                break;
-        }
-
-        Transform parent = transform;
-        
-        GameObject spawnedObject=Instantiate(snakeBody,newBodyPartPosition, Quaternion.identity,parent);
-
-        snakeBodyList.Add(spawnedObject);
-        snakeBodyPositionList.Add(spawnedObject.transform.position);
-           
+        Vector3 spawnPosition = snakeBodyPositionList[snakeBodyPositionList.Count-1];
+        GameObject spawedObject = Instantiate(snakeBody,spawnPosition,Quaternion.identity);
+        snakeBodyList.Add(spawedObject);
+        snakeBodyPositionList.Add(spawnPosition);
     }
+    private void PrintList()
+    {
+        Debug.Log("Snake Length is  :" + snakeLength);
 
+    }
+    private void MovementUpdate()
+    {
+
+    }
 }
