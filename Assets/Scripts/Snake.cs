@@ -1,10 +1,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
@@ -71,6 +68,7 @@ public class Snake : MonoBehaviour
                 transform.position = Vector3.zero;
                 SceneManager.LoadScene(0);
             }
+            newHeadPosition=TeleportSnake(newHeadPosition);
 
             for (int i = snakeBodyPositionList.Count - 1; i > 0; i--)
             {
@@ -120,5 +118,16 @@ public class Snake : MonoBehaviour
         }
         return false;
     }
-    
+    private Vector3 TeleportSnake(Vector3 newHeadPosition)
+    {
+        if (newHeadPosition.x > GameManager.Instance.GetGridWidth()/2 || newHeadPosition.x < -GameManager.Instance.GetGridWidth()/2)
+        {
+            newHeadPosition.x = -newHeadPosition.x;
+        }
+        if (newHeadPosition.y > GameManager.Instance.GetGridHeight()/2 || newHeadPosition.y < -GameManager.Instance.GetGridHeight()/ 2)
+        {
+            newHeadPosition.y = -newHeadPosition.y;
+        }
+        return newHeadPosition;
+    }
 }

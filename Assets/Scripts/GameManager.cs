@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour
     {
         return score;
     }
-
-
+    public float GetGridWidth()
+    {
+        return gridWidth;
+    }
+    public float GetGridHeight()
+    {
+        return gridHeight;
+    }
 }
