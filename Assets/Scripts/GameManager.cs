@@ -26,8 +26,9 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            float posX = Mathf.FloorToInt(Random.Range(-gridWidth / 2, gridWidth / 2 - 1));
-            float posY = Mathf.FloorToInt(Random.Range(-gridHeight / 2, gridHeight / 2 - 1));
+            float wallLength = 1f;
+            float posX = Mathf.FloorToInt(Random.Range(-gridWidth / 2 + wallLength, gridWidth / 2 - 1- wallLength));
+            float posY = Mathf.FloorToInt(Random.Range(-gridHeight / 2 + wallLength, gridHeight / 2 - 1- wallLength));
             Vector3 candidate= new Vector3(posX + 0.5f, posY + 0.5f, 0);
             if(!Snake.Instance.OccupiesPosition(candidate)) return candidate;
         }
