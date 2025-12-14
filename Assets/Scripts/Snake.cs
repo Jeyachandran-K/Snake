@@ -6,9 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
 {
+    public enum GameState
+    {
+        Wait,
+        Play,
+        End
+    }
+
     public static Snake Instance {  get; private set; }
 
     public event EventHandler OnEatingFood;
+    public event EventHandler OnStateChangeToPlay;
 
     [SerializeField] private float moveInterval = 0.15f;
     [SerializeField] private GameObject snakeBody;
@@ -19,12 +27,16 @@ public class Snake : MonoBehaviour
 
     private Vector3 inputVector;
 
+    private GameState gameState;
+
     private List<GameObject> snakeBodyList = new List<GameObject>();
     private List<Vector3> snakeBodyPositionList = new List<Vector3>();
 
     private void Awake()
     {
         Instance = this;
+
+        gameState = GameState.Wait;
         inputVector = Vector3.right;
     }
 
@@ -52,7 +64,15 @@ public class Snake : MonoBehaviour
         {
             inputVector = Vector3.down;
         }
-        MoveSnake();
+        if (GameInputs.Instance.IsSpacePressed())
+        {
+            gameState = GameState.Play;
+            OnStateChangeToPlay?.Invoke(this,EventArgs.Empty);
+        }
+        if (gameState == GameState.Play) 
+        {
+            MoveSnake();
+        }
     }
 
     private void MoveSnake()
@@ -64,9 +84,7 @@ public class Snake : MonoBehaviour
 
             if (snakeBodyPositionList.Contains(newHeadPosition))
             {
-                Debug.Log("Game Over!");
-                transform.position = Vector3.zero;
-                SceneManager.LoadScene(0);
+                GameOver();
             }
             newHeadPosition=TeleportSnake(newHeadPosition);
 
@@ -92,6 +110,7 @@ public class Snake : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
+        
         if(collider2D.gameObject.TryGetComponent(out Food food))
         {
             snakeLength++;
@@ -99,10 +118,14 @@ public class Snake : MonoBehaviour
             OnEatingFood?.Invoke(this,EventArgs.Empty);
             food.DestroySelf();
         }
-        
+        if(collider2D.gameObject.TryGetComponent(out BoundaryWall boundaryWall))
+        {
+            GameOver();
+        }
+
+
     }
 
-    
     private void GrowSnake()
     {
         Vector3 spawnPosition = snakeBodyPositionList[snakeBodyPositionList.Count-1];
@@ -129,5 +152,10 @@ public class Snake : MonoBehaviour
             newHeadPosition.y = -newHeadPosition.y;
         }
         return newHeadPosition;
+    }
+    private void GameOver()
+    {
+        transform.position = Vector3.zero;
+        SceneManager.LoadScene(0);
     }
 }

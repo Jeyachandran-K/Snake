@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
     public static GameManager Instance {  get; private set; }
     private int gridWidth = 34;
     private int gridHeight = 20;

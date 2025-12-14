@@ -127,6 +127,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""5cb3adb1-f71d-4552-b6f6-84d0a01b48b1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -217,6 +226,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ab8e6ee-0bc9-48c7-ba43-0215fe32d5ae"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -241,6 +261,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Snake_Down = m_Snake.FindAction("Down", throwIfNotFound: true);
         m_Snake_Right = m_Snake.FindAction("Right", throwIfNotFound: true);
         m_Snake_Left = m_Snake.FindAction("Left", throwIfNotFound: true);
+        m_Snake_StartGame = m_Snake.FindAction("StartGame", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -325,6 +346,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Snake_Down;
     private readonly InputAction m_Snake_Right;
     private readonly InputAction m_Snake_Left;
+    private readonly InputAction m_Snake_StartGame;
     /// <summary>
     /// Provides access to input actions defined in input action map "Snake".
     /// </summary>
@@ -352,6 +374,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Snake/Left".
         /// </summary>
         public InputAction @Left => m_Wrapper.m_Snake_Left;
+        /// <summary>
+        /// Provides access to the underlying input action "Snake/StartGame".
+        /// </summary>
+        public InputAction @StartGame => m_Wrapper.m_Snake_StartGame;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -390,6 +416,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Left.started += instance.OnLeft;
             @Left.performed += instance.OnLeft;
             @Left.canceled += instance.OnLeft;
+            @StartGame.started += instance.OnStartGame;
+            @StartGame.performed += instance.OnStartGame;
+            @StartGame.canceled += instance.OnStartGame;
         }
 
         /// <summary>
@@ -413,6 +442,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Left.started -= instance.OnLeft;
             @Left.performed -= instance.OnLeft;
             @Left.canceled -= instance.OnLeft;
+            @StartGame.started -= instance.OnStartGame;
+            @StartGame.performed -= instance.OnStartGame;
+            @StartGame.canceled -= instance.OnStartGame;
         }
 
         /// <summary>
@@ -494,5 +526,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "StartGame" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStartGame(InputAction.CallbackContext context);
     }
 }

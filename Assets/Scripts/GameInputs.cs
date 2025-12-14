@@ -38,5 +38,9 @@ public class GameInputs : MonoBehaviour
     {
         return inputActions.Snake.Left.IsPressed();
     }
+    public bool IsSpacePressed()
+    {
+        return inputActions.Snake.StartGame.IsPressed();
+    }
 
 }
